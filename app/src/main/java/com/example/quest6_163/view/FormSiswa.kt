@@ -62,7 +62,69 @@ fun FormSiswa(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            OutlinedTextField(
+                value = "",
+                singleLine = true,
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .width(width = 250.dp),
+                label = { Text(text = "Nama Lengkap") },
+                onValueChange = {
+                    txtNama = it
+                },
+            )
+            HorizontalDivider(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .width(250.dp), thickness = Thickness, color = Color.Red
+            )
+            Row {
+                pilihanJK.forEach { item ->
+                    Row(
+                        modifier = Modifier.selectable(
+                            selected = txtGender == item,
+                            onClick = {
+                                txtGender = item
+                            }
+                        ),
+                        verticalAlignment = Alignment.CenterVertically) {
+                        RadioButton(
+                            selected = txtGender == item,
+                            onClick = {
+                                txtGender = item
+                            }
+                        )
+                        Text(text = item)
+                    }
+                }
+            }
 
+            HorizontalDivider(
+                modifier = Modifier
+                    .padding(all = 20.dp)
+                    .width(width = 250.dp),
+                thickness = 1.dp,
+                color = Color.Red
+            )
+            OutlinedTextField(
+                value = txtAlamat,
+                singleLine = true,
+                modifier = Modifier
+                    .width(width = 250.dp),
+                label = { Text(text = "Alamat") },
+                onValueChange = {
+                    txtAlamat = it
+                },
+            )
+            Spacer(modifier = Modifier.height(height = 30.dp))
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth(fraction = 1f)
+                    .padding(all = 25.dp),
+                onClick = { OnSubmitButtonClicked(listData) }
+            ) {
+                Text(text = stringResource(id = R.string.submit))
+            }
         }
     }
 }
